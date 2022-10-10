@@ -2,6 +2,7 @@ package com.online.shop.system.shop.service.domain.entity;
 
 import com.online.shop.system.shop.service.domain.entity.base.AggregateRoot;
 import com.online.shop.system.shop.service.domain.entity.base.ProductID;
+import com.online.shop.system.shop.service.domain.valueobject.ProductStatus;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -15,11 +16,12 @@ public class Product extends AggregateRoot<ProductID> {
     private List<byte[]> images;
     private String description;
     private double rating;
-    private boolean active;
+    private ProductStatus status;
 
     private int quantity;
 
     private List<ProductReview> productReviews;
+
 
     public Product(ProductID productID){
         super.setId(productID);
@@ -37,6 +39,6 @@ public class Product extends AggregateRoot<ProductID> {
     public void initializeProduct(){
         setId(new ProductID(UUID.randomUUID()));
         rating = 0.0;
-        active = true;
+        status = ProductStatus.NOTAVAILABLE;
     }
 }

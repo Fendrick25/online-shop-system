@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="shop-application-service" />
         <module name="shop-domain-core" />
+        <module name="shop-dataaccess" />
       </profile>
     </annotationProcessing>
   </component>
@@ -15,6 +16,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="online-shop-system" options="-parameters" />
       <module name="shop-application-service" options="-parameters" />
+      <module name="shop-dataaccess" options="-parameters" />
       <module name="shop-domain" options="-parameters" />
       <module name="shop-domain-core" options="-parameters" />
       <module name="shop-service" options="-parameters" />

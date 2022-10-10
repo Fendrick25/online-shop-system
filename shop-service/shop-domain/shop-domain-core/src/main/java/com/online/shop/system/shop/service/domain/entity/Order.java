@@ -18,7 +18,7 @@ public class Order extends AggregateRoot<OrderID> {
     private final UserID userID;
     private final Address deliveryAddress;
     private final Money price;
-    private final List<OrderItem> items;
+    private final List<OrderItemE> items;
     private OrderStatus orderStatus;
 
     private Tracking tracking;
@@ -71,7 +71,7 @@ public class Order extends AggregateRoot<OrderID> {
         }
     }
 
-    private void validateItemPrice(OrderItem orderItem) {
+    private void validateItemPrice(OrderItemE orderItem) {
         if (!orderItem.isPriceValid()) {
             throw new ShopDomainException("Order item price: " + orderItem.getPrice().getAmount() +
                     " is not valid for product " + orderItem.getProduct().getId().getValue());
@@ -79,7 +79,7 @@ public class Order extends AggregateRoot<OrderID> {
     }
 
     @Builder
-    public Order(UserID userID, Address deliveryAddress, Money price, List<OrderItem> items) {
+    public Order(UserID userID, Address deliveryAddress, Money price, List<OrderItemE> items) {
         this.userID = userID;
         this.deliveryAddress = deliveryAddress;
         this.price = price;

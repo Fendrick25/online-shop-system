@@ -42,6 +42,11 @@
                 <artifactId>shop-domain-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.online.shop.system</groupId>
+                <artifactId>shop-application-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

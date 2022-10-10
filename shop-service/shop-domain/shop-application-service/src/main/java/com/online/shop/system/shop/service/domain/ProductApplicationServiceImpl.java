@@ -4,6 +4,7 @@ import com.online.shop.system.shop.service.domain.create.CreateProduct;
 import com.online.shop.system.shop.service.domain.create.response.CreateProductResponse;
 import com.online.shop.system.shop.service.domain.create.response.GetProductResponse;
 import com.online.shop.system.shop.service.domain.entity.Product;
+import com.online.shop.system.shop.service.domain.exception.ShopDomainException;
 import com.online.shop.system.shop.service.domain.mapper.ProductMapper;
 import com.online.shop.system.shop.service.domain.ports.input.service.ProductApplicationService;
 import com.online.shop.system.shop.service.domain.ports.output.repository.ProductRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -37,7 +39,10 @@ public class ProductApplicationServiceImpl implements ProductApplicationService 
     @Override
     @Transactional(readOnly = true)
     public GetProductResponse getProduct(UUID productID) {
-        Product product = productRepository.getProduct(productID);
-        return new GetProductResponse(product);
+        Optional<Product> product = productRepository.getProduct(productID);
+        if(product.isEmpty()){
+            throw new ShopDomainException("Product not found!");
+        }
+        return new GetProductResponse(product.get());
     }
 }

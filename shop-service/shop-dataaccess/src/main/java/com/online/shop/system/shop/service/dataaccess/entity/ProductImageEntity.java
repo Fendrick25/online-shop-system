@@ -23,7 +23,7 @@ public class ProductImageEntity {
     private String contentType;
     private Long size;
     @Lob
-    private Byte[] data;
+    private byte[] data;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "PRODUCT_ID")

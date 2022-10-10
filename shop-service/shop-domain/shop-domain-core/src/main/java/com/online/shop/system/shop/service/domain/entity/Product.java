@@ -36,6 +36,19 @@ public class Product extends AggregateRoot<ProductID> {
         this.quantity = quantity;
     }
 
+    @Builder(builderMethodName = "FullFieldBuilder")
+    public Product(ProductID productID, String name, Money price, List<byte[]> images, String description, double rating, ProductStatus status, int quantity, List<ProductReview> productReviews) {
+        super.setId(productID);
+        this.name = name;
+        this.price = price;
+        this.images = images;
+        this.description = description;
+        this.rating = rating;
+        this.status = status;
+        this.quantity = quantity;
+        this.productReviews = productReviews;
+    }
+
     public void initializeProduct(){
         setId(new ProductID(UUID.randomUUID()));
         rating = 0.0;

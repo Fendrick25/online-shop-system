@@ -19,4 +19,7 @@ public class CreateProduct {
     private final String description;
     @NotNull
     private final BigDecimal price;
+    @NotNull
+    private final Integer quantity;
+
 }

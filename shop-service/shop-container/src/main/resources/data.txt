@@ -1,0 +1,29 @@
+DROP SCHEMA IF EXISTS product CASCADE;
+
+CREATE SCHEMA product;
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+DROP TYPE IF EXISTS product_status;
+CREATE TYPE product_status AS ENUM ('AVAILABLE', 'NOTAVAILABLE');
+
+CREATE TABLE product.products
+(
+    id uuid NOT NULL,
+    name character varying COLLATE pg_catalog."default" NOT NULL,
+    price numeric(10, 2) NOT NULL,
+    description character varying COLLATE pg_catalog."default" NOT NULL,
+    rating DOUBLE NOT NULL,
+    quantity INTEGER NOT NULL,
+    CONSTRAINT products_pkey PRIMARY KEY (id)
+);
+
+
+CREATE TABLE product.product_image
+(
+    id uuid NOT NULL,
+    name character varying COLLATE pg_catalog."default" NOT NULL,
+    content_type character varying COLLATE pg_catalog."default" NOT NULL,
+    size NUMERIC NOT NULL,
+
+)

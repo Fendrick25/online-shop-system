@@ -13,6 +13,4 @@ import javax.validation.constraints.NotNull;
 public class CreateOrderResponse {
     @NotNull
     private final OrderID orderID;
-    @NotNull
-    private final String message;
 }

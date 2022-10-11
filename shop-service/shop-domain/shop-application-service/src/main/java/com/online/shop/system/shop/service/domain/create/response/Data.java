@@ -1,14 +1,17 @@
 package com.online.shop.system.shop.service.domain.create.response;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Getter
-@RequiredArgsConstructor
+@Setter
 @Builder
 @EqualsAndHashCode
-public abstract class Data<T> {
-    private final T value;
+public class Data<T> {
+    private final T data;
+    private final String message;
+
+    public Data(T data, String message) {
+        this.data = data;
+        this.message = message;
+    }
 }

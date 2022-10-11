@@ -13,6 +13,4 @@ import java.util.UUID;
 public class CreateProductResponse {
     @NotNull
     private final UUID productID;
-    @NotNull
-    private final String message;
 }

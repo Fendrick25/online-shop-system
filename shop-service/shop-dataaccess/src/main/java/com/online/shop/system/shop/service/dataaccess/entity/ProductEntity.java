@@ -1,6 +1,5 @@
 package com.online.shop.system.shop.service.dataaccess.entity;
 
-import com.online.shop.system.shop.service.domain.entity.Product;
 import com.online.shop.system.shop.service.domain.valueobject.ProductStatus;
 import lombok.*;
 
@@ -24,10 +23,13 @@ public class ProductEntity {
     private BigDecimal price;
     private String description;
     private double rating;
+
     @Enumerated(EnumType.STRING)
     private ProductStatus productStatus;
+
     private int quantity;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductImageEntity> productImages;
+
 }

@@ -1,9 +1,6 @@
 package com.online.shop.system.shop.service.dataaccess.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -14,16 +11,18 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "product_image")
 public class ProductImageEntity {
 
     @Id
     private UUID id;
+
     private String name;
     private String contentType;
     private Long size;
     @Lob
-    private byte[] data;
+    private byte[] image;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "PRODUCT_ID")

@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class OrderMapper {
+public class OrderApplicationMapper {
     public Order createOrderToOrder(CreateOrder createOrder){
         return Order.builder()
                 .userID(new UserID(createOrder.getUserID()))

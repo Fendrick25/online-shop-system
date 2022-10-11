@@ -6,12 +6,13 @@ import com.online.shop.system.shop.service.domain.entity.Product;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProductMapper {
+public class ProductApplicationMapper {
 
     public Product createProductToProduct(CreateProduct createProduct) {
         return Product.builder()
                 .name(createProduct.getName())
                 .price(new Money(createProduct.getPrice()))
+                .quantity(createProduct.getQuantity())
                 .description(createProduct.getDescription())
                 .build();
     }

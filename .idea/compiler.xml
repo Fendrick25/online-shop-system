@@ -2,24 +2,29 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="shop-application-service" />
         <module name="shop-domain-core" />
+        <module name="shop-container" />
+        <module name="shop-application-service" />
+        <module name="shop-application" />
         <module name="shop-dataaccess" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="online-shop-system" options="-parameters" />
+      <module name="online-shop-system" options="" />
+      <module name="shop-application" options="-parameters" />
       <module name="shop-application-service" options="-parameters" />
+      <module name="shop-container" options="-parameters" />
       <module name="shop-dataaccess" options="-parameters" />
-      <module name="shop-domain" options="-parameters" />
+      <module name="shop-domain" options="" />
       <module name="shop-domain-core" options="-parameters" />
-      <module name="shop-service" options="-parameters" />
+      <module name="shop-service" options="" />
     </option>
   </component>
 </project>

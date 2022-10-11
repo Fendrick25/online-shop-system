@@ -3,14 +3,10 @@ package com.online.shop.system.shop.service.domain;
 import com.online.shop.system.shop.service.domain.create.CreateProduct;
 import com.online.shop.system.shop.service.domain.create.response.CreateProductResponse;
 import com.online.shop.system.shop.service.domain.create.response.GetProductResponse;
-import com.online.shop.system.shop.service.domain.create.response.ProductFoundResponse;
-import com.online.shop.system.shop.service.domain.create.response.ProductNotFoundResponse;
 import com.online.shop.system.shop.service.domain.entity.Product;
-import com.online.shop.system.shop.service.domain.exception.ShopDomainException;
 import com.online.shop.system.shop.service.domain.mapper.ProductApplicationMapper;
 import com.online.shop.system.shop.service.domain.ports.input.service.ProductApplicationService;
 import com.online.shop.system.shop.service.domain.ports.output.repository.ProductRepository;
-import com.online.shop.system.shop.service.domain.valueobject.ProductStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -44,14 +40,7 @@ public class ProductApplicationServiceImpl implements ProductApplicationService 
     @Override
     public GetProductResponse getProduct(UUID productID) {
         Optional<Product> product = productRepository.getProduct(productID);
-
-        if(product.isEmpty()){
-            return ProductNotFoundResponse.builder()
-                    .message("Product not found, please use correct id")
-                    .build();
-        }
-
-        return ProductFoundResponse.builder()
+        return GetProductResponse.builder()
                 .productID(product.get().getId().getValue())
                 .name(product.get().getName())
                 .description(product.get().getDescription())
@@ -66,5 +55,10 @@ public class ProductApplicationServiceImpl implements ProductApplicationService 
     @Override
     public void uploadProductImage(UUID productID, List<MultipartFile> images) {
         productRepository.uploadImage(productID, images);
+    }
+
+    @Override
+    public void deleteProduct(UUID productID) {
+        productRepository.deleteProduct(productID);
     }
 }

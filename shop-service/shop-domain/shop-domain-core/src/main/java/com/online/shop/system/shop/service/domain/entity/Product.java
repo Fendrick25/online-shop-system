@@ -35,7 +35,7 @@ public class Product extends AggregateRoot<ProductID> {
         this.quantity = quantity;
     }
 
-    @Builder()
+    @Builder
     public Product(ProductID productID, String name, Money price, List<byte[]> images, String description, double rating, ProductStatus status, int quantity, List<ProductReview> productReviews) {
         super.setId(productID);
         this.name = name;

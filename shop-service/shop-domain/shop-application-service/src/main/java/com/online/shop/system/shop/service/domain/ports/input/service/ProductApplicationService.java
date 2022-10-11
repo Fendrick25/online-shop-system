@@ -12,6 +12,6 @@ import java.util.UUID;
 public interface ProductApplicationService {
     CreateProductResponse createProduct(CreateProduct createProduct);
     GetProductResponse getProduct(UUID productID);
-
     void uploadProductImage(UUID productID, List<MultipartFile> images);
+    void deleteProduct(UUID productID);
 }

@@ -10,7 +10,8 @@ import java.util.UUID;
 public interface ProductRepository {
     void createProduct(Product product);
     Optional<Product> getProduct(UUID productID);
-
     void uploadImage(UUID productID, List<MultipartFile> images);
+
+    void deleteProduct(UUID productID);
 
 }

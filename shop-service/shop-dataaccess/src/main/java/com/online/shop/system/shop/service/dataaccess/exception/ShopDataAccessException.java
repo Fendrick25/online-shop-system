@@ -22,7 +22,7 @@ public class ShopDataAccessException extends ResponseEntityExceptionHandler {
 
         ApiError err = ApiError.builder()
                 .timestamp(LocalDateTime.now())
-                .status(HttpStatus.BAD_REQUEST)
+                .status(HttpStatus.NOT_FOUND)
                 .message("Data not found")
                 .errors(details)
                 .build();

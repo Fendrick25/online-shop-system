@@ -2,6 +2,7 @@ package com.online.shop.system.shop.service.domain.ports.input.service;
 
 
 import com.online.shop.system.shop.service.domain.create.CreateProduct;
+import com.online.shop.system.shop.service.domain.create.UpdateProduct;
 import com.online.shop.system.shop.service.domain.create.response.CreateProductResponse;
 import com.online.shop.system.shop.service.domain.create.response.GetProductResponse;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,4 +15,5 @@ public interface ProductApplicationService {
     GetProductResponse getProduct(UUID productID);
     void uploadProductImage(UUID productID, List<MultipartFile> images);
     void deleteProduct(UUID productID);
+    void updateProduct(UpdateProduct updateProduct);
 }

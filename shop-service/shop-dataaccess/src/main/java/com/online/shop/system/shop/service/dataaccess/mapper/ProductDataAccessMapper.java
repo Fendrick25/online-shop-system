@@ -71,4 +71,5 @@ public class ProductDataAccessMapper {
                     }
                 }).collect(Collectors.toList());
     }
+
 }

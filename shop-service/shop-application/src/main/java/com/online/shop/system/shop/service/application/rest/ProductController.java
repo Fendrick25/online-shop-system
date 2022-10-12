@@ -1,6 +1,7 @@
 package com.online.shop.system.shop.service.application.rest;
 
 import com.online.shop.system.shop.service.domain.create.CreateProduct;
+import com.online.shop.system.shop.service.domain.create.UpdateProduct;
 import com.online.shop.system.shop.service.domain.create.response.CreateProductResponse;
 import com.online.shop.system.shop.service.domain.create.response.Data;
 import com.online.shop.system.shop.service.domain.create.response.GetProductResponse;
@@ -45,8 +46,12 @@ public class ProductController {
     @PostMapping("/images/{productID}")
     public ResponseEntity<?> uploadProductImage(@PathVariable("productID") UUID productID,  @RequestParam("images") MultipartFile[] images){
         productApplicationService.uploadProductImage(productID, List.of(images));
-        return ResponseEntity.ok("image uploaded successfully");
+        return ResponseEntity.ok("Image uploaded");
     }
 
-
+    @PatchMapping
+    public ResponseEntity<?> updateProduct(@RequestBody UpdateProduct updateProduct){
+        productApplicationService.updateProduct(updateProduct);
+        return ResponseEntity.ok("Product updated");
+    }
 }

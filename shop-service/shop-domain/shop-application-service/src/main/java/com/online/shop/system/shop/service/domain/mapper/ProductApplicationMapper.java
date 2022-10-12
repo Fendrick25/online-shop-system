@@ -1,8 +1,10 @@
 package com.online.shop.system.shop.service.domain.mapper;
 
 import com.online.shop.system.shop.service.domain.create.CreateProduct;
+import com.online.shop.system.shop.service.domain.create.UpdateProduct;
 import com.online.shop.system.shop.service.domain.entity.Money;
 import com.online.shop.system.shop.service.domain.entity.Product;
+import com.online.shop.system.shop.service.domain.entity.base.ProductID;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,6 +16,17 @@ public class ProductApplicationMapper {
                 .price(new Money(createProduct.getPrice()))
                 .quantity(createProduct.getQuantity())
                 .description(createProduct.getDescription())
+                .build();
+    }
+
+    public Product updateProductToProduct(UpdateProduct updateProduct){
+        return Product.builder()
+                .productID(new ProductID(updateProduct.getId()))
+                .name(updateProduct.getName())
+                .price(new Money(updateProduct.getPrice()))
+                .description(updateProduct.getDescription())
+                .quantity(updateProduct.getQuantity())
+                .status(updateProduct.getStatus())
                 .build();
     }
 }

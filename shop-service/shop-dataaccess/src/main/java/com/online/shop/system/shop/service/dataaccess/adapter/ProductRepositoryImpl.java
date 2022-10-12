@@ -40,7 +40,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public void uploadImage(UUID productID, List<MultipartFile> images) {
-        Optional<ProductEntity> product = productJpaRepository.findById(productID);
+        Optional<ProductEntity> product = Optional.ofNullable(productJpaRepository.findById(productID).orElseThrow(() -> new ResourceNotFoundException("Product not found")));
         List<ProductImageEntity> productImageEntities = productMapper.multiPartFileToProductImageEntities(images);
         productImageEntities.forEach(productImageEntity -> productImageEntity.setProduct(product.get()));
         productImageJpaRepository.saveAll(productImageEntities);
@@ -50,5 +50,13 @@ public class ProductRepositoryImpl implements ProductRepository {
     public void deleteProduct(UUID productID) {
         getProduct(productID);
         productJpaRepository.deleteById(productID);
+    }
+
+    @Override
+    @Transactional
+    public void updateProduct(Product product) {
+        Optional<ProductEntity> productEntity = Optional.ofNullable(productJpaRepository.findById(product.getId().getValue()).orElseThrow(() -> new ResourceNotFoundException("Product not found")));
+        productEntity.get().mapUpdateProduct(product);
+        productJpaRepository.save(productEntity.get());
     }
 }

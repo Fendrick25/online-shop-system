@@ -1,6 +1,7 @@
 package com.online.shop.system.shop.service.domain;
 
 import com.online.shop.system.shop.service.domain.create.CreateProduct;
+import com.online.shop.system.shop.service.domain.create.UpdateProduct;
 import com.online.shop.system.shop.service.domain.create.response.CreateProductResponse;
 import com.online.shop.system.shop.service.domain.create.response.GetProductResponse;
 import com.online.shop.system.shop.service.domain.entity.Product;
@@ -60,5 +61,11 @@ public class ProductApplicationServiceImpl implements ProductApplicationService 
     @Override
     public void deleteProduct(UUID productID) {
         productRepository.deleteProduct(productID);
+    }
+
+    @Override
+    public void updateProduct(UpdateProduct updateProduct) {
+        Product product = productMapper.updateProductToProduct(updateProduct);
+        productRepository.updateProduct(product);
     }
 }

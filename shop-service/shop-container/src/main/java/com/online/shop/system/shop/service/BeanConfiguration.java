@@ -1,9 +1,6 @@
 package com.online.shop.system.shop.service;
 
-import com.online.shop.system.shop.service.domain.OrderDomainService;
-import com.online.shop.system.shop.service.domain.OrderDomainServiceImpl;
-import com.online.shop.system.shop.service.domain.ProductDomainService;
-import com.online.shop.system.shop.service.domain.ProductDomainServiceImpl;
+import com.online.shop.system.shop.service.domain.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,5 +15,10 @@ public class BeanConfiguration {
     @Bean
     public ProductDomainService productDomainService(){
         return new ProductDomainServiceImpl();
+    }
+
+    @Bean
+    public ProductReviewDomainService productReviewDomainService(){
+        return new ProductReviewDomainServiceImpl();
     }
 }

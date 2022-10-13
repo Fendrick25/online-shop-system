@@ -47,6 +47,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
+    @Transactional
     public void deleteProduct(UUID productID) {
         getProduct(productID);
         productJpaRepository.deleteById(productID);

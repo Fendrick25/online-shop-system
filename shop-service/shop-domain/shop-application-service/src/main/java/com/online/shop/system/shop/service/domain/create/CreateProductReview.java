@@ -1,28 +1,27 @@
 package com.online.shop.system.shop.service.domain.create;
 
-import com.online.shop.system.shop.service.domain.valueobject.ProductStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import java.util.UUID;
+
 
 @Getter
 @Builder
 @AllArgsConstructor
-public class UpdateProduct {
+public class CreateProductReview {
     @NotNull
-    private final UUID id;
+    private final UUID productID;
     @NotNull
-    private final String name;
+    private final UUID userID;
     @NotNull
     private final String description;
     @NotNull
-    private final BigDecimal price;
-    @NotNull
-    private final ProductStatus status;
-    @NotNull
-    private final int quantity;
+    @Min(1)
+    @Max(5)
+    private final int rating;
 }

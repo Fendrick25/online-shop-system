@@ -27,7 +27,6 @@ public class ProductApplicationServiceImpl implements ProductApplicationService 
 
     private final ProductRepository productRepository;
     private final ProductApplicationMapper productMapper;
-
     private final ProductDomainService productDomainService;
 
     @Override
@@ -40,17 +39,7 @@ public class ProductApplicationServiceImpl implements ProductApplicationService 
 
     @Override
     public GetProductResponse getProduct(UUID productID) {
-        Optional<Product> product = productRepository.getProduct(productID);
-        return GetProductResponse.builder()
-                .productID(product.get().getId().getValue())
-                .name(product.get().getName())
-                .description(product.get().getDescription())
-                .price(product.get().getPrice().getAmount())
-                .quantity(product.get().getQuantity())
-                .rating(product.get().getRating())
-                .images(product.get().getImages())
-                .status(product.get().getStatus())
-                .build();
+        return productMapper.productToGetProductResponse(productRepository.getProduct(productID).get());
     }
 
     @Override

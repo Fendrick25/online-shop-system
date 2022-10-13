@@ -18,7 +18,7 @@ public class Order extends AggregateRoot<OrderID> {
     private final UserID userID;
     private final Address deliveryAddress;
     private final Money price;
-    private final List<OrderItemE> items;
+    private List<OrderItemE> items;
     private OrderStatus orderStatus;
 
     private Tracking tracking;

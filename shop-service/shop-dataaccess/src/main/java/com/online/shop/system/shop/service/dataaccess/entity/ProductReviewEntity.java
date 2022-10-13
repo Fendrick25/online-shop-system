@@ -13,6 +13,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Document(collection = "product_review")
 public class ProductReviewEntity {
 
@@ -20,9 +21,9 @@ public class ProductReviewEntity {
     private UUID id;
     private UUID userID;
     private UUID productID;
-    private String username;
     private String description;
-    private List<Binary> images;
-    private List<InputStream> videos;
+    private int rating;
+    private List<byte[]> images;
+    private List<byte[]> videos;
 
 }

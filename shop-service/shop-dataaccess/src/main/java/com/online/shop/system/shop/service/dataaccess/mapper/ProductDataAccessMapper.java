@@ -5,7 +5,6 @@ import com.online.shop.system.shop.service.dataaccess.entity.ProductImageEntity;
 import com.online.shop.system.shop.service.domain.entity.Money;
 import com.online.shop.system.shop.service.domain.entity.Product;
 import com.online.shop.system.shop.service.domain.entity.base.ProductID;
-import com.online.shop.system.shop.service.domain.valueobject.ProductStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 

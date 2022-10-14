@@ -6,6 +6,7 @@ import com.online.shop.system.shop.service.domain.entity.ProductReview;
 import com.online.shop.system.shop.service.domain.mapper.ProductReviewApplicationMapper;
 import com.online.shop.system.shop.service.domain.ports.input.service.ProductReviewApplicationService;
 import com.online.shop.system.shop.service.domain.ports.output.repository.ProductReviewRepository;
+import com.online.shop.system.shop.service.domain.service.ProductReviewDomainService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

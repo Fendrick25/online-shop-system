@@ -1,6 +1,9 @@
 package com.online.shop.system.shop.service;
 
-import com.online.shop.system.shop.service.domain.*;
+import com.online.shop.system.shop.service.domain.service.*;
+import com.online.shop.system.shop.service.domain.service.impl.OrderDomainServiceImpl;
+import com.online.shop.system.shop.service.domain.service.impl.ProductDomainServiceImpl;
+import com.online.shop.system.shop.service.domain.service.impl.ProductReviewDomainServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

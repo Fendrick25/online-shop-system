@@ -1,9 +1,6 @@
 package com.online.shop.system.shop.service.domain.entity;
 
-import com.online.shop.system.shop.service.domain.entity.base.AggregateRoot;
-import com.online.shop.system.shop.service.domain.entity.base.OrderID;
-import com.online.shop.system.shop.service.domain.entity.base.TrackingID;
-import com.online.shop.system.shop.service.domain.entity.base.UserID;
+import com.online.shop.system.shop.service.domain.entity.base.*;
 import com.online.shop.system.shop.service.domain.exception.ShopDomainException;
 import com.online.shop.system.shop.service.domain.valueobject.Address;
 import com.online.shop.system.shop.service.domain.valueobject.OrderStatus;
@@ -26,6 +23,7 @@ public class Order extends AggregateRoot<OrderID> {
     public void initializeOrder(){
         setId(new OrderID(UUID.randomUUID()));
         orderStatus = OrderStatus.PENDING;
+        initializeOrderItems();
     }
 
     public void validateOrder() {
@@ -75,6 +73,13 @@ public class Order extends AggregateRoot<OrderID> {
         if (!orderItem.isPriceValid()) {
             throw new ShopDomainException("Order item price: " + orderItem.getPrice().getAmount() +
                     " is not valid for product " + orderItem.getProduct().getId().getValue());
+        }
+    }
+
+    private void initializeOrderItems() {
+        long itemID = 1;
+        for (OrderItemE orderItem: items) {
+            orderItem.initializeOrderItem(super.getId(), new OrderItemID(itemID++));
         }
     }
 

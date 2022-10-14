@@ -2,18 +2,17 @@ package com.online.shop.system.shop.service.domain.entity;
 
 import com.online.shop.system.shop.service.domain.entity.base.BaseEntity;
 import com.online.shop.system.shop.service.domain.entity.base.TrackingID;
+import com.online.shop.system.shop.service.domain.valueobject.TrackingStatus;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter
 public class Tracking extends BaseEntity<TrackingID> {
-    private List<String> description;
+    private TrackingStatus trackingStatus;
 
-    public Tracking(TrackingID trackingID, List<String> description) {
+    public Tracking(TrackingID trackingID, TrackingStatus trackingStatus) {
         super.setId(trackingID);
-        this.description = description;
+        this.trackingStatus = trackingStatus;
     }
 }

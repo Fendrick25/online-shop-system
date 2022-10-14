@@ -1,4 +1,4 @@
-package com.online.shop.system.shop.service.domain;
+package com.online.shop.system.shop.service.domain.service;
 
 import com.online.shop.system.shop.service.domain.entity.ProductReview;
 

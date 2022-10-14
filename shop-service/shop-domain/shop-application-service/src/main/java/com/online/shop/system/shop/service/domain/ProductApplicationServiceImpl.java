@@ -8,6 +8,7 @@ import com.online.shop.system.shop.service.domain.entity.Product;
 import com.online.shop.system.shop.service.domain.mapper.ProductApplicationMapper;
 import com.online.shop.system.shop.service.domain.ports.input.service.ProductApplicationService;
 import com.online.shop.system.shop.service.domain.ports.output.repository.ProductRepository;
+import com.online.shop.system.shop.service.domain.service.ProductDomainService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service

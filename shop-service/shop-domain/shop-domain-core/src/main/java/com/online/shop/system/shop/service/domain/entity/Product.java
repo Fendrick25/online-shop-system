@@ -17,9 +17,7 @@ public class Product extends AggregateRoot<ProductID> {
     private String description;
     private double rating;
     private ProductStatus status;
-
     private int quantity;
-
     private List<ProductReview> productReviews;
 
 

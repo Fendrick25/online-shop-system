@@ -1,6 +1,7 @@
-package com.online.shop.system.shop.service.domain;
+package com.online.shop.system.shop.service.domain.service.impl;
 
 import com.online.shop.system.shop.service.domain.entity.Product;
+import com.online.shop.system.shop.service.domain.service.ProductDomainService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

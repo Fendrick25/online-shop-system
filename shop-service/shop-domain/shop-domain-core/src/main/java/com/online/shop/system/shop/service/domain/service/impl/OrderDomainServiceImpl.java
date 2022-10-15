@@ -28,4 +28,11 @@ public class OrderDomainServiceImpl implements OrderDomainService {
         log.info("Order is cancelled for order id: {}", order.getId().getValue());
         return order;
     }
+
+    @Override
+    public Order receiveOrder(Order order) {
+        order.received();
+        log.info("Order received for order id: {}", order.getId().getValue());
+        return order;
+    }
 }

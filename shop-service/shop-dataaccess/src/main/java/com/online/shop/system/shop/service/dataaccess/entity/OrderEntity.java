@@ -9,6 +9,7 @@ import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -29,19 +30,25 @@ public class OrderEntity {
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
     private Address deliveryAddress;
+
     private BigDecimal price;
 
-    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "USER_ID")
     private UserEntity user;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItemEntity> orderItems;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
-    @OneToMany
-    private TrackingEntity trackingEntity;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "tracking_id", referencedColumnName = "id")
+    private TrackingEntity tracking;
+
+
+    private ZonedDateTime createdAt;
 
     @Override
     public boolean equals(Object o) {

@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,7 +18,7 @@ import java.util.Objects;
 public class OrderItemEntity {
 
     @Id
-    private Long id;
+    private UUID id;
     private int quantity;
     private BigDecimal price;
     private BigDecimal subTotal;
@@ -25,7 +26,6 @@ public class OrderItemEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ORDER_ID")
     private OrderEntity order;
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "PRODUCT_ID")
     private ProductEntity product;

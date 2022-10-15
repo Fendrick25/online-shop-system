@@ -4,6 +4,7 @@ import com.online.shop.system.shop.service.domain.service.*;
 import com.online.shop.system.shop.service.domain.service.impl.OrderDomainServiceImpl;
 import com.online.shop.system.shop.service.domain.service.impl.ProductDomainServiceImpl;
 import com.online.shop.system.shop.service.domain.service.impl.ProductReviewDomainServiceImpl;
+import com.online.shop.system.shop.service.domain.service.impl.UserDomainServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,5 +24,10 @@ public class BeanConfiguration {
     @Bean
     public ProductReviewDomainService productReviewDomainService(){
         return new ProductReviewDomainServiceImpl();
+    }
+
+    @Bean
+    public UserDomainService userDomainService(){
+        return new UserDomainServiceImpl();
     }
 }

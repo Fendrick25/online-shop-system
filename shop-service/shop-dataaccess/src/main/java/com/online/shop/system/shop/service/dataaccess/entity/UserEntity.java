@@ -1,15 +1,14 @@
 package com.online.shop.system.shop.service.dataaccess.entity;
 
-import com.online.shop.system.shop.service.domain.entity.Order;
-import com.online.shop.system.shop.service.domain.entity.OrderItemE;
 import com.online.shop.system.shop.service.domain.valueobject.Address;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.*;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Getter
@@ -19,6 +18,7 @@ import java.util.UUID;
 @Builder
 @Entity
 @Table(name = "users")
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class UserEntity {
 
     @Id
@@ -27,8 +27,24 @@ public class UserEntity {
     private String password;
     private String email;
     private String phoneNumber;
+
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "jsonb")
     private List<Address> addresses;
 
-    @OneToMany
-    private List<OrderItemE> orders;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<OrderEntity> orders;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserEntity that = (UserEntity) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

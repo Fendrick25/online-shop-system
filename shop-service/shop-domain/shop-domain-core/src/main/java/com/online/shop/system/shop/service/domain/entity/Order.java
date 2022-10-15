@@ -4,11 +4,17 @@ import com.online.shop.system.shop.service.domain.entity.base.*;
 import com.online.shop.system.shop.service.domain.exception.ShopDomainException;
 import com.online.shop.system.shop.service.domain.valueobject.Address;
 import com.online.shop.system.shop.service.domain.valueobject.OrderStatus;
+import com.online.shop.system.shop.service.domain.valueobject.TrackingStatus;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
+
+import static com.online.shop.system.shop.service.domain.DomainConstants.UTC;
 
 @Getter
 public class Order extends AggregateRoot<OrderID> {
@@ -17,12 +23,16 @@ public class Order extends AggregateRoot<OrderID> {
     private final Money price;
     private List<OrderItemE> items;
     private OrderStatus orderStatus;
-
     private Tracking tracking;
+
+    private ZonedDateTime createdAt;
 
     public void initializeOrder(){
         setId(new OrderID(UUID.randomUUID()));
         orderStatus = OrderStatus.PENDING;
+        tracking = new Tracking();
+        tracking.initTracking();
+        this.createdAt = ZonedDateTime.now(ZoneId.of(UTC));
         initializeOrderItems();
     }
 
@@ -37,6 +47,7 @@ public class Order extends AggregateRoot<OrderID> {
             throw new ShopDomainException("Order is not in correct state for pay operation!");
         }
         tracking.setId(new TrackingID(UUID.randomUUID()));
+        tracking.setTrackingStatus(TrackingStatus.ONPROCESS);
     }
 
     public void cancel() {
@@ -44,6 +55,13 @@ public class Order extends AggregateRoot<OrderID> {
             throw new ShopDomainException("Order is not in correct state for cancel operation!");
         }
         orderStatus = OrderStatus.CANCELLED;
+    }
+
+    public void received(){
+        if(!(tracking.getTrackingStatus() == TrackingStatus.DELIVERED)){
+            throw new ShopDomainException("Order is not in correct state for received operation");
+        }
+        orderStatus = OrderStatus.FINISHED;
     }
 
     private void validateInitialOrder() {
@@ -77,17 +95,20 @@ public class Order extends AggregateRoot<OrderID> {
     }
 
     private void initializeOrderItems() {
-        long itemID = 1;
         for (OrderItemE orderItem: items) {
-            orderItem.initializeOrderItem(super.getId(), new OrderItemID(itemID++));
+            orderItem.initializeOrderItem(super.getId(), new OrderItemID(UUID.randomUUID()));
         }
     }
 
     @Builder
-    public Order(UserID userID, Address deliveryAddress, Money price, List<OrderItemE> items) {
+    public Order(OrderID orderID, UserID userID, Address deliveryAddress, Money price, List<OrderItemE> items, OrderStatus orderStatus, Tracking tracking, ZonedDateTime createdAt) {
+        super.setId(orderID);
         this.userID = userID;
         this.deliveryAddress = deliveryAddress;
         this.price = price;
         this.items = items;
+        this.orderStatus = orderStatus;
+        this.tracking = tracking;
+        this.createdAt = createdAt;
     }
 }

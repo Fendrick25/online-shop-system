@@ -20,7 +20,5 @@ public class CreateUser {
     @Email
     private final String email;
     @NotNull
-    @Min(10)
-    @Max(16)
     private final String phoneNumber;
 }

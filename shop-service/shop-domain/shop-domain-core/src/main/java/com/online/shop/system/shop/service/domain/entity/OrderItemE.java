@@ -6,6 +6,8 @@ import com.online.shop.system.shop.service.domain.entity.base.OrderItemID;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.Objects;
+
 
 @Getter
 public class OrderItemE extends BaseEntity<OrderItemID> {
@@ -31,7 +33,20 @@ public class OrderItemE extends BaseEntity<OrderItemID> {
 
     boolean isPriceValid() {
         return price.isGreaterThanZero() &&
-                price.equals(product.getPrice()) &&
                 price.multiply(quantity).equals(subTotal);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        OrderItemE that = (OrderItemE) o;
+        return orderID.equals(that.orderID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), orderID);
     }
 }

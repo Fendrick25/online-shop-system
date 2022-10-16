@@ -3,6 +3,7 @@ package com.online.shop.system.shop.service.dataaccess.adapter;
 import com.online.shop.system.shop.service.dataaccess.entity.OrderEntity;
 import com.online.shop.system.shop.service.dataaccess.entity.ProductEntity;
 import com.online.shop.system.shop.service.dataaccess.entity.UserEntity;
+import com.online.shop.system.shop.service.dataaccess.exception.MoneyNotEqualException;
 import com.online.shop.system.shop.service.dataaccess.exception.ResourceNotFoundException;
 import com.online.shop.system.shop.service.dataaccess.mapper.OrderDataAccessMapper;
 import com.online.shop.system.shop.service.dataaccess.repository.OrderJpaRepository;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -46,5 +48,18 @@ public class OrderRepositoryImpl implements OrderRepository {
     @Transactional(readOnly = true)
     public Optional<Order> getOrder(UUID orderID) {
         return Optional.ofNullable(orderJpaRepository.findById(orderID).map(orderDataAccessMapper::orderEntityToOrder).orElseThrow(() -> new ResourceNotFoundException("Order not found")));
+    }
+
+    @Override
+    @Transactional
+    public void payOrder(Order order, BigDecimal amount) {
+        OrderEntity orderEntity = orderJpaRepository.findById(order.getId().getValue()).orElseThrow(() -> new ResourceNotFoundException("Order not found"));
+        orderEntity.setOrderStatus(order.getOrderStatus());
+        orderEntity.setTracking(orderDataAccessMapper.trackingToTrackingEntity(order.getTracking()));
+        if(!(orderEntity.getPrice().equals(amount)))
+            throw new MoneyNotEqualException("Money not equals to price");
+
+
+        orderJpaRepository.save(orderEntity);
     }
 }

@@ -4,38 +4,36 @@ import com.online.shop.system.shop.service.domain.create.CreateOrder;
 import com.online.shop.system.shop.service.domain.create.OrderAddress;
 import com.online.shop.system.shop.service.domain.create.OrderItem;
 import com.online.shop.system.shop.service.domain.create.response.GetOrderResponse;
-import com.online.shop.system.shop.service.domain.entity.Money;
-import com.online.shop.system.shop.service.domain.entity.Order;
-import com.online.shop.system.shop.service.domain.entity.OrderItemE;
-import com.online.shop.system.shop.service.domain.entity.Product;
+import com.online.shop.system.shop.service.domain.entity.*;
 import com.online.shop.system.shop.service.domain.entity.base.OrderID;
 import com.online.shop.system.shop.service.domain.entity.base.ProductID;
 import com.online.shop.system.shop.service.domain.entity.base.UserID;
 import com.online.shop.system.shop.service.domain.valueobject.Address;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class OrderApplicationMapper {
+
+    private final ItemApplicationMapper itemApplicationMapper;
     public Order createOrderToOrder(CreateOrder createOrder){
         return Order.builder()
                 .userID(new UserID(createOrder.getUserID()))
                 .price(new Money(createOrder.getPrice()))
-                .items(orderItemsToOrderItemsE(createOrder.getItems()))
+                .items(orderItemsToOrderItemEs(createOrder.getItems()))
                 .deliveryAddress(orderAddressToAddress(createOrder.getAddress()))
                 .build();
     }
 
-    public List<OrderItemE> orderItemsToOrderItemsE(List<OrderItem> orderItems){
+    public List<OrderItemE> orderItemsToOrderItemEs(List<OrderItem> orderItems){
         return orderItems.stream()
                 .map(orderItem ->
                         OrderItemE.builder()
-                                .product(new Product(new ProductID(orderItem.getProductID())))
-                                .price(new Money(orderItem.getPrice()))
-                                .quantity(orderItem.getQuantity())
-                                .subTotal(new Money(orderItem.getSubTotal()))
+                                .item(itemApplicationMapper.orderItemToItem(orderItem))
                                 .build()).collect(Collectors.toList());
     }
 
@@ -59,14 +57,15 @@ public class OrderApplicationMapper {
                 .build();
     }
 
-    private List<OrderItem> orderItemESToOrderItems(List<OrderItemE> orderItemES){
+    public List<OrderItem> orderItemESToOrderItems(List<OrderItemE> orderItemES){
         return orderItemES.stream()
                 .map(orderItemE -> OrderItem.builder()
-                        .productID(orderItemE.getProduct().getId().getValue())
-                        .quantity(orderItemE.getQuantity())
-                        .price(orderItemE.getPrice().getAmount())
-                        .subTotal(orderItemE.getSubTotal().getAmount())
+                        .productID(orderItemE.getItem().getProduct().getId().getValue())
+                        .quantity(orderItemE.getItem().getQuantity())
+                        .price(orderItemE.getItem().getPrice().getAmount())
+                        .subTotal(orderItemE.getItem().getSubTotal().getAmount())
                         .build()).collect(Collectors.toList());
     }
+
 
 }

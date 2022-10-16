@@ -7,7 +7,6 @@ import com.online.shop.system.shop.service.domain.valueobject.OrderStatus;
 import com.online.shop.system.shop.service.domain.valueobject.TrackingStatus;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -43,11 +42,11 @@ public class Order extends AggregateRoot<OrderID> {
     }
 
     public void pay(){
-        if (orderStatus != OrderStatus.PAID) {
+        if (orderStatus != OrderStatus.PENDING) {
             throw new ShopDomainException("Order is not in correct state for pay operation!");
         }
-        tracking.setId(new TrackingID(UUID.randomUUID()));
         tracking.setTrackingStatus(TrackingStatus.ONPROCESS);
+        orderStatus = OrderStatus.PAID;
     }
 
     public void cancel() {
@@ -55,6 +54,7 @@ public class Order extends AggregateRoot<OrderID> {
             throw new ShopDomainException("Order is not in correct state for cancel operation!");
         }
         orderStatus = OrderStatus.CANCELLED;
+        tracking.setTrackingStatus(TrackingStatus.CANCELLED);
     }
 
     public void received(){
@@ -78,7 +78,7 @@ public class Order extends AggregateRoot<OrderID> {
     private void validateItemsPrice() {
         Money orderItemsTotal = items.stream().map(orderItem -> {
             validateItemPrice(orderItem);
-            return orderItem.getSubTotal();
+            return orderItem.getItem().getSubTotal();
         }).reduce(Money.ZERO, Money::add);
 
         if (!price.equals(orderItemsTotal)) {
@@ -89,8 +89,8 @@ public class Order extends AggregateRoot<OrderID> {
 
     private void validateItemPrice(OrderItemE orderItem) {
         if (!orderItem.isPriceValid()) {
-            throw new ShopDomainException("Order item price: " + orderItem.getPrice().getAmount() +
-                    " is not valid for product " + orderItem.getProduct().getId().getValue());
+            throw new ShopDomainException("Order item price: " + orderItem.getItem().getPrice().getAmount() +
+                    " is not valid for product " + orderItem.getItem().getProduct().getId().getValue());
         }
     }
 

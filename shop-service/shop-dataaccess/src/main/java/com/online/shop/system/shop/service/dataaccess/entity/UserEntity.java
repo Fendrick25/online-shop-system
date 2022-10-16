@@ -35,6 +35,10 @@ public class UserEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<OrderEntity> orders;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "CART_ID", referencedColumnName = "id")
+    private CartEntity cart;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

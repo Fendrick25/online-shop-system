@@ -30,4 +30,19 @@ public class ShopDataAccessException extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(err, err.getStatus());
     }
 
+    @ExceptionHandler(MoneyNotEqualException.class)
+    public ResponseEntity<?> handleMoneyNotEqualException(MoneyNotEqualException exception){
+        List<String> details = new ArrayList<>();
+        details.add(exception.getMessage());
+
+        ApiError err = ApiError.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.BAD_REQUEST)
+                .message("Money not valid")
+                .errors(details)
+                .build();
+
+        return new ResponseEntity<>(err, err.getStatus());
+    }
+
 }

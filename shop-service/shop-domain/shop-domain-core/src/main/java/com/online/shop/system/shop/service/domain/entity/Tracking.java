@@ -31,7 +31,7 @@ public class Tracking extends BaseEntity<TrackingID> {
     }
 
     public void initTracking(){
-        setId(new TrackingID(new UUID(0,0)));
+        setId(new TrackingID(UUID.randomUUID()));
         this.trackingStatus = TrackingStatus.NOTVERIFIED;
     }
 }

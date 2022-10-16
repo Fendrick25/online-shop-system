@@ -12,6 +12,7 @@ import com.online.shop.system.shop.service.domain.entity.base.UserID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +34,13 @@ public class OrderDataAccessMapper {
                 .build();
     }
 
+    public TrackingEntity trackingToTrackingEntity(Tracking tracking){
+        return TrackingEntity.builder()
+                .id(tracking.getId().getValue())
+                .trackingStatus(tracking.getTrackingStatus())
+                .build();
+    }
+
     public Order orderEntityToOrder(OrderEntity orderEntity){
         return Order.builder()
                 .orderID(new OrderID(orderEntity.getId()))
@@ -51,10 +59,10 @@ public class OrderDataAccessMapper {
                 .map(orderItemE ->
                         OrderItemEntity.builder()
                                 .id(orderItemE.getId().getValue())
-                                .product(mapProductIDTOProductEntity(orderItemE.getProduct()))
-                                .quantity(orderItemE.getQuantity())
-                                .price(orderItemE.getPrice().getAmount())
-                                .subTotal(orderItemE.getSubTotal().getAmount())
+                                .product(mapProductIDTOProductEntity(orderItemE.getItem().getProduct()))
+                                .quantity(orderItemE.getItem().getQuantity())
+                                .price(orderItemE.getItem().getPrice().getAmount())
+                                .subTotal(orderItemE.getItem().getSubTotal().getAmount())
                                 .build()).collect(Collectors.toList());
     }
 
@@ -68,19 +76,16 @@ public class OrderDataAccessMapper {
                 .map(orderItemEntity ->
                         OrderItemE.builder()
                                 .orderItemID(new OrderItemID(orderItemEntity.getId()))
-                                .quantity(orderItemEntity.getQuantity())
-                                .price(new Money(orderItemEntity.getPrice()))
-                                .product(productDataAccessMapper.productEntityToProduct(orderItemEntity.getProduct()))
-                                .subTotal(new Money(orderItemEntity.getSubTotal()))
+                                .orderID(new OrderID(orderItemEntity.getOrder().getId()))
+                                .item(Item.builder()
+                                        .product(productDataAccessMapper.productEntityToProduct(orderItemEntity.getProduct()))
+                                        .quantity(orderItemEntity.getQuantity())
+                                        .price(new Money(orderItemEntity.getPrice()))
+                                        .subTotal(new Money(orderItemEntity.getSubTotal()))
+                                        .build())
                                 .build()).collect(Collectors.toList());
     }
 
-    private TrackingEntity trackingToTrackingEntity(Tracking tracking){
-        return TrackingEntity.builder()
-                .id(tracking.getId().getValue())
-                .trackingStatus(tracking.getTrackingStatus())
-                .build();
-    }
 
     private Tracking trackingEntityToTracking(TrackingEntity tracking){
         return Tracking.builder()

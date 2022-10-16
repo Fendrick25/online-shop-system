@@ -1,9 +1,12 @@
 package com.online.shop.system.shop.service.domain;
 
 import com.online.shop.system.shop.service.domain.create.CreateOrder;
+import com.online.shop.system.shop.service.domain.create.PayOrder;
 import com.online.shop.system.shop.service.domain.create.response.CreateOrderResponse;
 import com.online.shop.system.shop.service.domain.create.response.GetOrderResponse;
+import com.online.shop.system.shop.service.domain.create.response.OrderPaidResponse;
 import com.online.shop.system.shop.service.domain.entity.Order;
+import com.online.shop.system.shop.service.domain.entity.base.OrderID;
 import com.online.shop.system.shop.service.domain.mapper.OrderApplicationMapper;
 import com.online.shop.system.shop.service.domain.ports.input.service.OrderApplicationService;
 import com.online.shop.system.shop.service.domain.ports.output.repository.OrderRepository;
@@ -11,6 +14,7 @@ import com.online.shop.system.shop.service.domain.service.OrderDomainService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.UUID;
@@ -35,5 +39,18 @@ public class OrderApplicationServiceImpl implements OrderApplicationService {
     @Override
     public GetOrderResponse getOrder(UUID orderID) {
         return orderApplicationMapper.orderToGetOrderResponse(orderRepository.getOrder(orderID).get());
+    }
+
+    @Override
+    public OrderPaidResponse payOrder(PayOrder payOrder) {
+        Order order = orderRepository.getOrder(payOrder.getOrderID()).get();
+        Order orderPaid = Order.builder()
+                .orderID(order.getId())
+                .orderStatus(order.getOrderStatus())
+                .tracking(order.getTracking())
+                .build();
+        orderDomainService.payOrder(orderPaid);
+        orderRepository.payOrder(orderPaid, payOrder.getAmount());
+        return new OrderPaidResponse(orderPaid.getId().getValue());
     }
 }

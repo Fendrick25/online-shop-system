@@ -17,11 +17,12 @@ public class User extends AggregateRoot<UserID> {
     private final String phoneNumber;
     private List<Address> userAddresses;
     private List<Order> orders;
-
     private List<ProductReview> productReviews;
 
+    private Cart cart;
+
     @Builder
-    public User(UserID userID, String username, String password, String email, String phoneNumber, List<Address> userAddresses, List<Order> orders, List<ProductReview> productReviews) {
+    public User(UserID userID, String username, String password, String email, String phoneNumber, List<Address> userAddresses, List<Order> orders, List<ProductReview> productReviews, Cart cart) {
         super.setId(userID);
         this.username = username;
         this.password = password;
@@ -30,10 +31,13 @@ public class User extends AggregateRoot<UserID> {
         this.userAddresses = userAddresses;
         this.orders = orders;
         this.productReviews = productReviews;
+        this.cart = cart;
     }
 
     public void initializeUser(){
         setId(new UserID(UUID.randomUUID()));
+        cart = new Cart(this.getId());
+        cart.initCart();
     }
 
 

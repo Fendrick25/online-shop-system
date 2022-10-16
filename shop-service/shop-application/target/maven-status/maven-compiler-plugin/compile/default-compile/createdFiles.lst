@@ -1,0 +1,5 @@
+com\online\shop\system\shop\service\application\rest\UserController.class
+com\online\shop\system\shop\service\application\rest\ProductReviewController.class
+com\online\shop\system\shop\service\application\rest\OrderController.class
+com\online\shop\system\shop\service\application\rest\ProductController.class
+com\online\shop\system\shop\service\application\rest\CartController.class

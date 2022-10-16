@@ -1,9 +1,11 @@
 package com.online.shop.system.shop.service.application.rest;
 
 import com.online.shop.system.shop.service.domain.create.CreateOrder;
+import com.online.shop.system.shop.service.domain.create.PayOrder;
 import com.online.shop.system.shop.service.domain.create.response.CreateOrderResponse;
 import com.online.shop.system.shop.service.domain.create.response.Data;
 import com.online.shop.system.shop.service.domain.create.response.GetOrderResponse;
+import com.online.shop.system.shop.service.domain.create.response.OrderPaidResponse;
 import com.online.shop.system.shop.service.domain.ports.input.service.OrderApplicationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,6 +29,11 @@ public class OrderController {
     @GetMapping("/{orderID}")
     public ResponseEntity<Data<GetOrderResponse>> getOrder(@PathVariable("orderID") UUID orderID){
         return new ResponseEntity<>(new Data<>(orderApplicationService.getOrder(orderID), "Order found"), HttpStatus.FOUND);
+    }
+
+    @PatchMapping
+    public ResponseEntity<Data<OrderPaidResponse>> payOrder(@RequestBody PayOrder payOrder){
+        return new ResponseEntity<>(new Data<>(orderApplicationService.payOrder(payOrder), "Order paid"), HttpStatus.ACCEPTED);
     }
 
 

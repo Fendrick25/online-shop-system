@@ -15,6 +15,8 @@ import java.util.UUID;
 public class CreateOrder {
 
     @NotNull
+    private final UUID cartID;
+    @NotNull
     private final UUID userID;
     @NotNull
     private final BigDecimal price;

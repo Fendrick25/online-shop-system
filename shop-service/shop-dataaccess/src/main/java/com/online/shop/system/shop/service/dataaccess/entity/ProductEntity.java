@@ -1,5 +1,6 @@
 package com.online.shop.system.shop.service.dataaccess.entity;
 
+import com.online.shop.system.shop.service.domain.entity.CartItemE;
 import com.online.shop.system.shop.service.domain.entity.Product;
 import com.online.shop.system.shop.service.domain.valueobject.ProductStatus;
 import lombok.*;
@@ -34,8 +35,11 @@ public class ProductEntity {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductImageEntity> productImages;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST)
     private List<OrderItemEntity> orderItems;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<CartItemEntity> cartItem;
 
     public void mapUpdateProduct(Product product){
         this.name = product.getName();

@@ -1,11 +1,11 @@
 package com.online.shop.system.shop.service.domain.mapper;
 
+import com.online.shop.system.shop.service.domain.create.CartItem;
 import com.online.shop.system.shop.service.domain.create.CreateOrder;
 import com.online.shop.system.shop.service.domain.create.OrderAddress;
 import com.online.shop.system.shop.service.domain.create.OrderItem;
 import com.online.shop.system.shop.service.domain.create.response.GetOrderResponse;
 import com.online.shop.system.shop.service.domain.entity.*;
-import com.online.shop.system.shop.service.domain.entity.base.OrderID;
 import com.online.shop.system.shop.service.domain.entity.base.ProductID;
 import com.online.shop.system.shop.service.domain.entity.base.UserID;
 import com.online.shop.system.shop.service.domain.valueobject.Address;
@@ -24,16 +24,21 @@ public class OrderApplicationMapper {
         return Order.builder()
                 .userID(new UserID(createOrder.getUserID()))
                 .price(new Money(createOrder.getPrice()))
-                .items(orderItemsToOrderItemEs(createOrder.getItems()))
+                .items(cartItemsToOrderItemEs(createOrder.getItems()))
                 .deliveryAddress(orderAddressToAddress(createOrder.getAddress()))
                 .build();
     }
 
-    public List<OrderItemE> orderItemsToOrderItemEs(List<OrderItem> orderItems){
-        return orderItems.stream()
-                .map(orderItem ->
+    public List<OrderItemE> cartItemsToOrderItemEs(List<CartItem> cartItems){
+        return cartItems.stream()
+                .map(cartItem ->
                         OrderItemE.builder()
-                                .item(itemApplicationMapper.orderItemToItem(orderItem))
+                                .item(Item.builder()
+                                        .product(new Product(new ProductID(cartItem.getProductID())))
+                                        .price(new Money(cartItem.getPrice()))
+                                        .quantity(cartItem.getQuantity())
+                                        .subTotal(new Money(cartItem.getSubTotal()))
+                                        .build())
                                 .build()).collect(Collectors.toList());
     }
 
@@ -42,7 +47,7 @@ public class OrderApplicationMapper {
                 .orderID(order.getId().getValue())
                 .userID(order.getUserID().getValue())
                 .price(order.getPrice().getAmount())
-                .deliveryAddress(order.getDeliveryAddress())
+                .deliveryAddress(order.getDeliveryAddress()).userID(order.getUserID().getValue())
                 .items(orderItemESToOrderItems(order.getItems()))
                 .orderStatus(order.getOrderStatus())
                 .tracking(order.getTracking())

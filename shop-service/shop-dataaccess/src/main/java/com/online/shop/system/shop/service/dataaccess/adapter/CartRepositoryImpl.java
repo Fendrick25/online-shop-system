@@ -8,14 +8,16 @@ import com.online.shop.system.shop.service.dataaccess.mapper.CartDataAccessMappe
 import com.online.shop.system.shop.service.dataaccess.repository.CartItemJpaRepository;
 import com.online.shop.system.shop.service.dataaccess.repository.CartJpaRepository;
 import com.online.shop.system.shop.service.dataaccess.repository.ProductJpaRepository;
-import com.online.shop.system.shop.service.domain.entity.CartItem;
+import com.online.shop.system.shop.service.domain.create.OrderItem;
+import com.online.shop.system.shop.service.domain.entity.Cart;
+import com.online.shop.system.shop.service.domain.entity.CartItemE;
 import com.online.shop.system.shop.service.domain.ports.output.repository.CartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.UUID;
 
 
 @Component
@@ -29,7 +31,7 @@ public class CartRepositoryImpl implements CartRepository {
 
     @Override
     @Transactional
-    public void addToCart(CartItem cartItem) {
+    public void addToCart(CartItemE cartItem) {
         CartItemEntity cartItemEntity = cartDataAccessMapper.cartItemToCartItemEntity(cartItem);
         ProductEntity productEntity = productJpaRepository.findById(cartItem.getItem().getProduct().getId().getValue()).orElseThrow(() -> new ResourceNotFoundException("Product not found"));
 
@@ -46,6 +48,28 @@ public class CartRepositoryImpl implements CartRepository {
             cartItemEntity.setProduct(productEntity);
             cartItemJpaRepository.save(cartItemEntity);
         }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Cart getCart(UUID cartID) {
+        return cartJpaRepository.findById(cartID).map(cartDataAccessMapper::cartEntityToCart).orElseThrow(() -> new ResourceNotFoundException("Cart not found"));
+    }
+
+    @Override
+    @Transactional
+    public void deleteCartItem(UUID cartItemID) {
+        cartItemJpaRepository.findById(cartItemID).orElseThrow(() -> new ResourceNotFoundException("Cart item not found"));
+        cartItemJpaRepository.deleteById(cartItemID);
+    }
+
+    @Override
+    @Transactional
+    public void updateCartItem(UUID cartItemID, OrderItem orderItem) {
+        CartItemEntity cartItemEntity = cartItemJpaRepository.findById(cartItemID).orElseThrow(() -> new ResourceNotFoundException("Product not found in cart!"));
+        cartItemEntity.setQuantity(orderItem.getQuantity());
+        cartItemEntity.setSubTotal(orderItem.getSubTotal());
+        cartItemJpaRepository.save(cartItemEntity);
     }
 
 }

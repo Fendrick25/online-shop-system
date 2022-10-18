@@ -33,7 +33,7 @@ public class OrderEntity {
 
     private BigDecimal price;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "USER_ID")
     private UserEntity user;
 

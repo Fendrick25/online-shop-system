@@ -18,7 +18,6 @@ import java.util.UUID;
 @Builder
 @Entity
 @Table(name = "users")
-@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class UserEntity {
 
     @Id
@@ -28,9 +27,8 @@ public class UserEntity {
     private String email;
     private String phoneNumber;
 
-    @Type(type = "jsonb")
-    @Column(columnDefinition = "jsonb")
-    private List<Address> addresses;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<AddressEntity> addresses;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<OrderEntity> orders;

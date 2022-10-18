@@ -4,9 +4,7 @@ C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\s
 C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\service\impl\OrderDomainServiceImpl.java
 C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\entity\base\OrderItemID.java
 C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\service\impl\ProductReviewDomainServiceImpl.java
-C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\service\TrackingDomainService.java
 C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\service\CartDomainService.java
-C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\entity\CartItem.java
 C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\valueobject\Address.java
 C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\entity\base\CartID.java
 C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\entity\base\TrackingID.java
@@ -19,12 +17,12 @@ C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\s
 C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\entity\Cart.java
 C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\entity\ProductReview.java
 C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\service\impl\UserDomainServiceImpl.java
+C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\entity\CartItemE.java
 C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\entity\base\ProductID.java
 C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\service\OrderDomainService.java
 C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\entity\Order.java
 C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\service\impl\CartDomainServiceImpl.java
 C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\entity\base\OrderID.java
-C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\service\impl\TrackingDomainServiceImpl.java
 C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\DomainConstants.java
 C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\entity\Tracking.java
 C:\Users\lenovo\Documents\IntelliJ\online-shop-system\shop-service\shop-domain\shop-domain-core\src\main\java\com\online\shop\system\shop\service\domain\service\UserDomainService.java

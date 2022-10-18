@@ -1,8 +1,8 @@
 package com.online.shop.system.shop.service.domain.service;
 
 
-import com.online.shop.system.shop.service.domain.entity.CartItem;
+import com.online.shop.system.shop.service.domain.entity.CartItemE;
 
 public interface CartDomainService {
-    CartItem addToCart(CartItem cartItem);
+    CartItemE addToCart(CartItemE cartItem);
 }

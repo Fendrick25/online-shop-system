@@ -6,6 +6,7 @@ import com.online.shop.system.shop.service.dataaccess.entity.UserEntity;
 import com.online.shop.system.shop.service.dataaccess.exception.MoneyNotEqualException;
 import com.online.shop.system.shop.service.dataaccess.exception.ResourceNotFoundException;
 import com.online.shop.system.shop.service.dataaccess.mapper.OrderDataAccessMapper;
+import com.online.shop.system.shop.service.dataaccess.repository.CartItemJpaRepository;
 import com.online.shop.system.shop.service.dataaccess.repository.OrderJpaRepository;
 import com.online.shop.system.shop.service.dataaccess.repository.ProductJpaRepository;
 import com.online.shop.system.shop.service.dataaccess.repository.UserJpaRepository;
@@ -41,7 +42,6 @@ public class OrderRepositoryImpl implements OrderRepository {
         });
         orderEntity.setUser(userEntity);
         orderJpaRepository.save(orderEntity);
-
     }
 
     @Override
@@ -61,5 +61,26 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 
         orderJpaRepository.save(orderEntity);
+    }
+
+    @Override
+    @Transactional
+    public void cancelOrder(Order order) {
+        orderJpaRepository.save(assignUserToOrderEntity(order));
+    }
+
+    @Override
+    @Transactional
+    public void orderReceived(Order order) {
+        orderJpaRepository.save(assignUserToOrderEntity(order));
+    }
+
+    @Transactional
+    private OrderEntity assignUserToOrderEntity(Order order){
+        UserEntity userEntity = userJpaRepository.findById(order.getUserID().getValue()).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        OrderEntity orderEntity = orderDataAccessMapper.orderToOrderEntity(order);
+        orderEntity.getOrderItems().forEach(orderItemEntity -> orderItemEntity.setOrder(orderEntity));
+        orderEntity.setUser(userEntity);
+        return orderEntity;
     }
 }

@@ -12,14 +12,18 @@ com\online\shop\system\shop\service\dataaccess\entity\OrderItemEntity.class
 com\online\shop\system\shop\service\dataaccess\mapper\UserDataAccessMapper.class
 com\online\shop\system\shop\service\dataaccess\repository\OrderJpaRepository.class
 com\online\shop\system\shop\service\dataaccess\entity\ProductReviewEntity.class
+com\online\shop\system\shop\service\dataaccess\repository\UserAddressJpaRepository.class
 com\online\shop\system\shop\service\dataaccess\entity\ProductEntity.class
 com\online\shop\system\shop\service\dataaccess\entity\TrackingEntity.class
+com\online\shop\system\shop\service\dataaccess\mapper\TrackingDataAccessMapper.class
 com\online\shop\system\shop\service\dataaccess\mapper\OrderDataAccessMapper.class
+com\online\shop\system\shop\service\dataaccess\entity\AddressEntity$AddressEntityBuilder.class
 com\online\shop\system\shop\service\dataaccess\mapper\ProductReviewDataAccessMapper.class
 com\online\shop\system\shop\service\dataaccess\adapter\ProductReviewRepositoryImpl.class
 com\online\shop\system\shop\service\dataaccess\exception\ShopDataAccessException.class
 com\online\shop\system\shop\service\dataaccess\entity\TrackingEntity$TrackingEntityBuilder.class
 com\online\shop\system\shop\service\dataaccess\repository\ProductImageJpaRepository.class
+com\online\shop\system\shop\service\dataaccess\adapter\TrackingRepositoryImpl.class
 com\online\shop\system\shop\service\dataaccess\entity\CartEntity$CartEntityBuilder.class
 com\online\shop\system\shop\service\dataaccess\entity\UserEntity.class
 com\online\shop\system\shop\service\dataaccess\entity\CartItemEntity.class
@@ -28,6 +32,7 @@ com\online\shop\system\shop\service\dataaccess\repository\TrackingJpaRepository.
 com\online\shop\system\shop\service\dataaccess\entity\OrderItemEntity$OrderItemEntityBuilder.class
 com\online\shop\system\shop\service\dataaccess\adapter\CartRepositoryImpl.class
 com\online\shop\system\shop\service\dataaccess\adapter\OrderRepositoryImpl.class
+com\online\shop\system\shop\service\dataaccess\entity\AddressEntity.class
 com\online\shop\system\shop\service\dataaccess\entity\ProductReviewEntity$ProductReviewEntityBuilder.class
 com\online\shop\system\shop\service\dataaccess\entity\CartEntity.class
 com\online\shop\system\shop\service\dataaccess\entity\ProductImageEntity.class
@@ -35,5 +40,6 @@ com\online\shop\system\shop\service\dataaccess\entity\UserEntity$UserEntityBuild
 com\online\shop\system\shop\service\dataaccess\repository\UserJpaRepository.class
 com\online\shop\system\shop\service\dataaccess\mapper\CartDataAccessMapper.class
 com\online\shop\system\shop\service\dataaccess\entity\OrderEntity$OrderEntityBuilder.class
+com\online\shop\system\shop\service\dataaccess\mapper\UserAddressDataAccessMapper.class
 com\online\shop\system\shop\service\dataaccess\mapper\ProductDataAccessMapper.class
 com\online\shop\system\shop\service\dataaccess\repository\CartItemJpaRepository.class

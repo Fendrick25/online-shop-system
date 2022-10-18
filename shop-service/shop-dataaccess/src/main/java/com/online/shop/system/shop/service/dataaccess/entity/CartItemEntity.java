@@ -19,14 +19,13 @@ public class CartItemEntity {
     @Id
     private UUID id;
     private int quantity;
-    private BigDecimal price;
     private BigDecimal subTotal;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "PRODUCT_ID")
     private ProductEntity product;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "CART_ID")
     private CartEntity cart;
 

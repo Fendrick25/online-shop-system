@@ -9,6 +9,7 @@ import java.util.UUID;
 public interface OrderRepository {
     void createOrder(Order order);
     Optional<Order> getOrder(UUID orderID);
-
     void payOrder(Order order, BigDecimal amount);
+    void cancelOrder(Order order);
+    void orderReceived(Order order);
 }

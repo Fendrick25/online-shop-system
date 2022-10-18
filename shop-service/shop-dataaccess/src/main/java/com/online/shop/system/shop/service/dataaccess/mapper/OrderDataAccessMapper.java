@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 public class OrderDataAccessMapper {
 
     private final ProductDataAccessMapper productDataAccessMapper;
+    private final TrackingDataAccessMapper trackingDataAccessMapper;
 
     public OrderEntity orderToOrderEntity(Order order){
         return OrderEntity.builder()
@@ -49,7 +50,7 @@ public class OrderDataAccessMapper {
                 .price(new Money(orderEntity.getPrice()))
                 .items(orderItemEntityToOrderItemES(orderEntity.getOrderItems()))
                 .orderStatus(orderEntity.getOrderStatus())
-                .tracking(trackingEntityToTracking(orderEntity.getTracking()))
+                .tracking(trackingDataAccessMapper.trackingEntityToTracking(orderEntity.getTracking()))
                 .createdAt(orderEntity.getCreatedAt())
                 .build();
     }
@@ -87,10 +88,5 @@ public class OrderDataAccessMapper {
     }
 
 
-    private Tracking trackingEntityToTracking(TrackingEntity tracking){
-        return Tracking.builder()
-                .trackingID(new TrackingID(tracking.getId()))
-                .trackingStatus(tracking.getTrackingStatus())
-                .build();
-    }
+
 }

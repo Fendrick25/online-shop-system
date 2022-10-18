@@ -23,5 +23,5 @@ public class CreateOrder {
     @NotNull
     private final OrderAddress address;
     @NotNull
-    private final List<OrderItem> items;
+    private final List<CartItem> items;
 }

@@ -39,6 +39,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
+    @Transactional
     public void uploadImage(UUID productID, List<MultipartFile> images) {
         Optional<ProductEntity> product = Optional.ofNullable(productJpaRepository.findById(productID).orElseThrow(() -> new ResourceNotFoundException("Product not found")));
         List<ProductImageEntity> productImageEntities = productMapper.multiPartFileToProductImageEntities(images);

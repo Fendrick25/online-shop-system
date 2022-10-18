@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Component
 public class ProductDataAccessMapper {
     public Product productEntityToProduct(ProductEntity productEntity){
-/*        return new Product(new ProductID(productEntity.getId()),
+/*        return new Product(new ProductID(productEntity.getProductID()),
                 productEntity.getName(),
                 new Money(productEntity.getPrice()),
                 productImageEntityToImage(productEntity.getProductImages()),

@@ -5,4 +5,4 @@ Implementing Hexagonal Architecture
 
 Technology used Java Spring Boot, PostgreSQL and MongoDB
 
-Please upload your suggetions and critics about this project!. 
+Please upload your suggetions and critics to Issues about this project!. 

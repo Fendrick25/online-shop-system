@@ -25,7 +25,7 @@ public class OrderController {
 
     @GetMapping("/{orderID}")
     public ResponseEntity<Data<GetOrderResponse>> getOrder(@PathVariable("orderID") UUID orderID){
-        return new ResponseEntity<>(new Data<>(orderApplicationService.getOrder(orderID), "Order found"), HttpStatus.FOUND);
+        return new ResponseEntity<>(new Data<>(orderApplicationService.getOrder(orderID), "Order found"), HttpStatus.OK);
     }
 
     @PatchMapping("/pay")

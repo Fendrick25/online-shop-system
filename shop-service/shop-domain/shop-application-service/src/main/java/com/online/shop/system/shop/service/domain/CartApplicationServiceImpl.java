@@ -33,7 +33,7 @@ public class CartApplicationServiceImpl implements CartApplicationService {
         CartItemE cartItem = cartApplicationMapper.addToCartToCartItem(addToCart);
         cartDomainService.addToCart(cartItem);
         cartRepository.addToCart(cartItem);
-        return new AddToCartResponse(cartItem.getCartID().getValue());
+        return new AddToCartResponse(cartItem.getId().getValue());
     }
 
     @Override

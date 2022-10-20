@@ -1,8 +1,11 @@
 package com.online.shop.system.shop.service.dataaccess.adapter;
 
+import com.online.shop.system.shop.service.dataaccess.entity.ProductRatingEntity;
 import com.online.shop.system.shop.service.dataaccess.entity.ProductReviewEntity;
 import com.online.shop.system.shop.service.dataaccess.exception.ResourceNotFoundException;
 import com.online.shop.system.shop.service.dataaccess.mapper.ProductReviewDataAccessMapper;
+import com.online.shop.system.shop.service.dataaccess.repository.ProductJpaRepository;
+import com.online.shop.system.shop.service.dataaccess.repository.ProductRatingJpaRepository;
 import com.online.shop.system.shop.service.dataaccess.repository.ProductReviewMongoRepository;
 import com.online.shop.system.shop.service.domain.entity.ProductReview;
 import com.online.shop.system.shop.service.domain.ports.output.repository.ProductReviewRepository;
@@ -22,9 +25,19 @@ public class ProductReviewRepositoryImpl implements ProductReviewRepository {
     private final ProductReviewDataAccessMapper productReviewDataAccessMapper;
     private final ProductReviewMongoRepository productReviewMongoRepository;
 
+    private final ProductRatingJpaRepository productRatingJpaRepository;
+    private final ProductJpaRepository productJpaRepository;
+
     @Override
+    @Transactional
     public void saveProductReview(ProductReview productReview) {
         productReviewMongoRepository.save(productReviewDataAccessMapper.productReviewToProductReviewEntity(productReview));
+        ProductRatingEntity productRatingEntity = ProductRatingEntity.builder()
+                .rating(productReview.getRating())
+                .product(productJpaRepository.findById(productReview.getProductID().getValue()).orElseThrow(() -> new ResourceNotFoundException("Product not found")))
+                .build();
+
+        productRatingJpaRepository.save(productRatingEntity);
     }
 
     @Override

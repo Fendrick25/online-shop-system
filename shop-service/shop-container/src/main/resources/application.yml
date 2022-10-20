@@ -18,6 +18,7 @@ spring:
     password: root
     driver-class-name: org.postgresql.Driver
     platform: postgres
+    schema: classpath:data.sql
     initialization-mode: always
 
   data:

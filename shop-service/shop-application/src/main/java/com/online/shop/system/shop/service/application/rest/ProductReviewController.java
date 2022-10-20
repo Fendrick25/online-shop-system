@@ -28,14 +28,14 @@ public class ProductReviewController {
     }
 
     @PatchMapping("/{productID}")
-    public ResponseEntity<?> uploadImageAndVideo(@PathVariable("id") UUID productID,  @RequestParam("images") MultipartFile[] images, @RequestParam("videos") MultipartFile[] videos){
+    public ResponseEntity<?> uploadImageAndVideo(@PathVariable("productID") UUID productID,  @RequestParam("images") MultipartFile[] images, @RequestParam("videos") MultipartFile[] videos){
         productReviewApplicationService.uploadImageAndVideo(productID, List.of(images), List.of(videos));
         return ResponseEntity.ok("Product review contents uploaded");
     }
 
     @GetMapping("/{productID}")
-    public ResponseEntity<Data<GetProductReviewResponse>> getProductReview(@PathVariable("id") UUID productID){
-        return new ResponseEntity<>(new Data<>( productReviewApplicationService.getProductReview(productID), "Product review found!"), HttpStatus.FOUND);
+    public ResponseEntity<Data<GetProductReviewResponse>> getProductReview(@PathVariable("productID") UUID productID){
+        return new ResponseEntity<>(new Data<>( productReviewApplicationService.getProductReview(productID), "Product review found!"), HttpStatus.OK);
     }
 
     @DeleteMapping("/{productReviewID}")

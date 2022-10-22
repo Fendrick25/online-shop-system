@@ -1,5 +1,10 @@
-CREATE OR REPLACE FUNCTION update_cart_subtotal() RETURNS trigger as
-$BODY$
+
+
+CREATE OR REPLACE FUNCTION update_cart_subtotal()
+    RETURNS TRIGGER
+    LANGUAGE PLPGSQL
+    AS
+$$
 BEGIN    
     UPDATE cart_item
     SET sub_total = pr.price * cart_item.quantity
@@ -9,18 +14,14 @@ BEGIN
     
 RETURN NEW;
 END;
-$BODY$
-LANGUAGE plpgsql;
-
-CREATE TRIGGER update_cart_subtotal
-AFTER UPDATE ON products
-FOR EACH ROW
-EXECUTE PROCEDURE update_cart_subtotal();
+$$;
 
 
-
-CREATE OR REPLACE FUNCTION update_cart_price() RETURNS trigger as
-$BODY$
+CREATE OR REPLACE FUNCTION update_cart_price()
+    RETURNS TRIGGER
+    LANGUAGE PLPGSQL
+    AS
+$$
 BEGIN
     UPDATE carts
     SET price = subtotal
@@ -32,19 +33,18 @@ BEGIN
         GROUP BY cart_id
     )as t2
     WHERE t2.cart_id = carts.id;
-    
+
 RETURN NEW;
 END;
-$BODY$
-LANGUAGE plpgsql;
+$$;
 
-CREATE TRIGGER update_cart_price
-AFTER UPDATE OF sub_total ON cart_item
-FOR EACH ROW
-EXECUTE PROCEDURE update_cart_price();
 
-CREATE OR REPLACE FUNCTION update_product_quantity() RETURNS trigger as
-$BODY$
+CREATE OR REPLACE FUNCTION update_product_quantity()
+    RETURNS TRIGGER
+    LANGUAGE PLPGSQL
+    AS
+
+$$
 BEGIN
     IF OLD.order_status = 'PENDING' AND NEW.order_status = 'PAID' THEN
     UPDATE products
@@ -57,20 +57,17 @@ BEGIN
     )as t2
     WHERE t2.product_id = products.id;
     END IF;
-    
+
 RETURN NEW;
 END;
-$BODY$
-LANGUAGE plpgsql
-
-CREATE TRIGGER update_product_quantity
-AFTER UPDATE OF order_status on orders
-FOR EACH ROW
-EXECUTE PROCEDURE update_product_quantity();
+$$;
 
 
-CREATE OR REPLACE FUNCTION update_product_rating() RETURNS trigger as
-$BODY$
+CREATE OR REPLACE FUNCTION update_product_rating()
+    RETURNS TRIGGER
+    LANGUAGE PLPGSQL
+    AS
+$$
 BEGIN
     UPDATE products
     SET rating = avgRating
@@ -84,8 +81,26 @@ BEGIN
     WHERE t2.product_id = products.id;
 RETURN NEW;
 END;
-$BODY$
-LANGUAGE plpgsql
+$$;
+
+
+CREATE TRIGGER update_cart_subtotal
+    AFTER UPDATE ON products
+    FOR EACH ROW
+EXECUTE PROCEDURE update_cart_subtotal();
+
+
+CREATE TRIGGER update_cart_price
+AFTER UPDATE OF sub_total ON cart_item
+FOR EACH ROW
+EXECUTE PROCEDURE update_cart_price();
+
+
+CREATE TRIGGER update_product_quantity
+AFTER UPDATE OF order_status on orders
+FOR EACH ROW
+EXECUTE PROCEDURE update_product_quantity();
+
 
 CREATE TRIGGER update_product_rating
 AFTER INSERT OR UPDATE ON product_ratings

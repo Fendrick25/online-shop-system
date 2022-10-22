@@ -1,6 +1,7 @@
 package com.online.shop.system.shop.service.domain.create.response;
 
 import com.online.shop.system.shop.service.domain.create.CartItem;
+import com.online.shop.system.shop.service.domain.create.OrderAddress;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

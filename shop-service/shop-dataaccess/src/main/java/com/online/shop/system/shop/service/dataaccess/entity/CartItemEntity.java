@@ -21,11 +21,11 @@ public class CartItemEntity {
     private int quantity;
     private BigDecimal subTotal;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCT_ID")
     private ProductEntity product;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CART_ID")
     private CartEntity cart;
 

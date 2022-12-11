@@ -26,7 +26,6 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     private final OrderJpaRepository orderJpaRepository;
     private final OrderDataAccessMapper orderDataAccessMapper;
-
     private final UserJpaRepository userJpaRepository;
     private final ProductJpaRepository productJpaRepository;
 

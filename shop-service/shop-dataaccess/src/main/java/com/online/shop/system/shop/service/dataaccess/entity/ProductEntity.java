@@ -54,11 +54,11 @@ public class ProductEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductEntity that = (ProductEntity) o;
-        return id.equals(that.id);
+        return id.equals(that.id) && Objects.equals(productImages, that.productImages) && Objects.equals(orderItems, that.orderItems) && Objects.equals(cartItem, that.cartItem) && Objects.equals(ratingsLog, that.ratingsLog);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, productImages, orderItems, cartItem, ratingsLog);
     }
 }

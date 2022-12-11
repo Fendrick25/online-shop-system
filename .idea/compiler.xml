@@ -22,7 +22,7 @@
       <module name="shop-application-service" options="-parameters" />
       <module name="shop-container" options="-parameters" />
       <module name="shop-dataaccess" options="-parameters" />
-      <module name="shop-domain" options="" />
+      <module name="shop-domain" options="-parameters" />
       <module name="shop-domain-core" options="-parameters" />
       <module name="shop-service" options="" />
     </option>

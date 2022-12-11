@@ -24,7 +24,7 @@ public class ProductImageEntity {
     @Lob
     private byte[] image;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCT_ID")
     private ProductEntity product;
 

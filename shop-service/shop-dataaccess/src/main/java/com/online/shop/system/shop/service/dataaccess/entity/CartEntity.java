@@ -32,12 +32,12 @@ public class CartEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CartEntity cart = (CartEntity) o;
-        return id.equals(cart.id);
+        CartEntity that = (CartEntity) o;
+        return id.equals(that.id) && Objects.equals(items, that.items);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, items);
     }
 }

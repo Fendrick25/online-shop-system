@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Getter
-public class ProductReview extends AggregateRoot<ProductReviewID> {
+public class ProductReview extends BaseEntity<ProductReviewID> {
     private final ProductID productID;
     private final UserID userID;
     private final String description;

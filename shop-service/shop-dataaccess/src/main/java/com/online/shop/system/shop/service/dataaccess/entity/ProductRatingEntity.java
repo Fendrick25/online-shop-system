@@ -18,6 +18,6 @@ public class ProductRatingEntity {
     private Integer id;
     private int rating;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private ProductEntity product;
 }

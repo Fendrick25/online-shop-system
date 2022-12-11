@@ -33,7 +33,7 @@ public class OrderEntity {
 
     private BigDecimal price;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private UserEntity user;
 
@@ -55,11 +55,11 @@ public class OrderEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderEntity that = (OrderEntity) o;
-        return id.equals(that.id);
+        return id.equals(that.id) && Objects.equals(orderItems, that.orderItems);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, orderItems);
     }
 }

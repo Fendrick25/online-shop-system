@@ -23,10 +23,10 @@ public class OrderItemEntity {
     private BigDecimal price;
     private BigDecimal subTotal;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ORDER_ID")
     private OrderEntity order;
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCT_ID")
     private ProductEntity product;
 

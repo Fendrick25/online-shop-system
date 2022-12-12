@@ -4,11 +4,12 @@ import com.online.shop.system.shop.service.domain.create.CreateUser;
 import com.online.shop.system.shop.service.domain.create.OrderAddress;
 import com.online.shop.system.shop.service.domain.create.response.CreateUserResponse;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 public interface UserApplicationService {
-    CreateUserResponse createUser(CreateUser createUser);
-    void addAddress(UUID userID, OrderAddress orderAddress);
+    CreateUserResponse createUser(@Valid CreateUser createUser);
+    void addAddress(UUID userID, @Valid OrderAddress orderAddress);
     void deleteAddress(UUID addressID);
-    void updateAddress(UUID addressID, OrderAddress orderAddress);
+    void updateAddress(UUID addressID, @Valid OrderAddress orderAddress);
 }

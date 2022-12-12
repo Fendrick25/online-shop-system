@@ -7,12 +7,13 @@ import com.online.shop.system.shop.service.domain.create.response.GetOrderRespon
 import com.online.shop.system.shop.service.domain.create.response.OrderCancelledResponse;
 import com.online.shop.system.shop.service.domain.create.response.OrderPaidResponse;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 public interface OrderApplicationService {
-    CreateOrderResponse createOrder(CreateOrder createOrder);
+    CreateOrderResponse createOrder(@Valid CreateOrder createOrder);
     GetOrderResponse getOrder(UUID orderID);
-    OrderPaidResponse payOrder(PayOrder payOrder);
+    OrderPaidResponse payOrder(@Valid PayOrder payOrder);
     OrderCancelledResponse cancelOrder(UUID orderID);
 
     void orderReceived(UUID orderID);

@@ -7,13 +7,14 @@ import com.online.shop.system.shop.service.domain.create.response.CreateProductR
 import com.online.shop.system.shop.service.domain.create.response.GetProductResponse;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
 public interface ProductApplicationService {
-    CreateProductResponse createProduct(CreateProduct createProduct);
+    CreateProductResponse createProduct(@Valid CreateProduct createProduct);
     GetProductResponse getProduct(UUID productID);
     void uploadProductImage(UUID productID, List<MultipartFile> images);
     void deleteProduct(UUID productID);
-    void updateProduct(UpdateProduct updateProduct);
+    void updateProduct(@Valid UpdateProduct updateProduct);
 }

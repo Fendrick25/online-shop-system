@@ -5,11 +5,12 @@ import com.online.shop.system.shop.service.domain.create.OrderItem;
 import com.online.shop.system.shop.service.domain.create.response.AddToCartResponse;
 import com.online.shop.system.shop.service.domain.create.response.GetCartResponse;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 public interface CartApplicationService {
-    AddToCartResponse addToCart(AddToCart addToCart);
-    GetCartResponse getCart(UUID cartID);
-    String deleteCartItem(UUID cartItemID);
+    AddToCartResponse addToCart(@Valid AddToCart addToCart);
+    GetCartResponse getCart(@Valid UUID cartID);
+    String deleteCartItem(@Valid UUID cartItemID);
     String updateCartItem(UUID cartItemID, OrderItem orderItem);
 }

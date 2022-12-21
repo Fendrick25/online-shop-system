@@ -58,8 +58,6 @@ public class OrderRepositoryImpl implements OrderRepository {
         if(!(orderEntity.getPrice().equals(amount)))
             throw new MoneyNotEqualException("Money not equals to price");
 
-
-        orderJpaRepository.save(orderEntity);
     }
 
     @Override

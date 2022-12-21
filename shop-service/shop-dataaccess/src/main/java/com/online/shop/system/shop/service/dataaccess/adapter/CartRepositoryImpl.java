@@ -69,7 +69,6 @@ public class CartRepositoryImpl implements CartRepository {
         CartItemEntity cartItemEntity = cartItemJpaRepository.findById(cartItemID).orElseThrow(() -> new ResourceNotFoundException("Product not found in cart!"));
         cartItemEntity.setQuantity(orderItem.getQuantity());
         cartItemEntity.setSubTotal(orderItem.getSubTotal());
-        cartItemJpaRepository.save(cartItemEntity);
     }
 
 }

@@ -46,7 +46,6 @@ public class ProductReviewRepositoryImpl implements ProductReviewRepository {
         Optional<ProductReviewEntity> productReviewEntity = getProductReviewByProductID(productID);
         productReviewEntity.get().setImages(productReviewDataAccessMapper.multiPartFilesToBinaryFiles(images));
         productReviewEntity.get().setVideos(productReviewDataAccessMapper.multiPartFilesToBinaryFiles(videos));
-        productReviewMongoRepository.save(productReviewEntity.get());
     }
 
     @Override

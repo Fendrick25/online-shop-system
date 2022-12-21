@@ -26,7 +26,6 @@ public class UserRepositoryImpl implements UserRepository {
     private final UserAddressDataAccessMapper userAddressDataAccessMapper;
 
     @Override
-    @Transactional
     public void createUser(User user) {
         userJpaRepository.save(userDataAccessMapper.userToUserEntity(user));
     }
@@ -45,12 +44,12 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    @Transactional
     public void updateAddress(UUID addressID, Address address) {
         AddressEntity addressEntity = userAddressJpaRepository.findById(addressID).orElseThrow(() -> new ResourceNotFoundException("Address not found"));
         addressEntity.setStreet(address.getStreet());
         addressEntity.setPostalCode(address.getPostalCode());
         addressEntity.setCity(address.getCity());
-        userAddressJpaRepository.save(addressEntity);
     }
 
 }

@@ -27,7 +27,6 @@ public class ProductRepositoryImpl implements ProductRepository {
     private final ProductDataAccessMapper productMapper;
 
     @Override
-    @Transactional
     public void createProduct(Product product) {
         productJpaRepository.save(productMapper.productToProductEntity(product));
     }
